@@ -386,6 +386,7 @@
             body {
                 background: none;
                 -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
                 height: auto;
             }
 
@@ -717,7 +718,8 @@
             </div>
 
             <h3 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Reçine / Mürekkep Fiyatları (Liste Fiyatı)
-                <span style="font-size: 14px; color: #999;">(1 Litre Şişe)</span></h3>
+                <span style="font-size: 14px; color: #999;">(1 Litre Şişe)</span>
+            </h3>
 
             <div class="pricing-grid">
                 <div class="price-item">
@@ -775,6 +777,65 @@
             document.getElementById('lightbox').style.display = 'none';
         }
     </script>
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <a href="catalogue.pdf" target="_blank" class="fab-btn pdf-btn">
+            📥 Katalog İndir (PDF)
+        </a>
+        <a href="https://www.youtube.com/watch?v=WntST66JFz8" target="_blank" class="fab-btn video-btn">
+            ▶ Youtube'da İzle
+        </a>
+    </div>
+
+    <style>
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .fab-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 16px;
+        }
+
+        .fab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .pdf-btn {
+            background-color: #231F20;
+            /* Dark */
+            border: 2px solid white;
+        }
+
+        .video-btn {
+            background-color: #ED1C24;
+            /* Mimaki Red */
+            border: 2px solid white;
+        }
+
+        @media print {
+            .fab-container {
+                display: none;
+            }
+        }
+    </style>
+
 </body>
 
 </html>
