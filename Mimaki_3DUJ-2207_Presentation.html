@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mimaki 3DUJ-2207 Tanıtımı</title>
+    <style>
+        :root {
+            --primary: #ED1C24;
+            /* Mimaki Red */
+            --dark: #231F20;
+            --light: #FFFFFF;
+            --gray: #F3F4F6;
+            --text: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            background: var(--light);
+            width: 297mm;
+            /* A4 Landscape width */
+            height: 210mm;
+            /* A4 Landscape height */
+            margin: 20px auto;
+            padding: 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+
+        .slide-content {
+            padding: 40px 60px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Branding */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slide-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        /* Cover Slide */
+        .cover-slide {
+            background: linear-gradient(135deg, var(--dark) 0%, #4a4a4a 100%);
+            color: var(--light);
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px;
+            position: relative;
+        }
+
+        .cover-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://mimaki.com/product/3d/3d-inkjet/3duj-2207/img/index/main_01.jpg') no-repeat center center;
+            background-size: cover;
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            opacity: 0.8;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 60%;
+        }
+
+        .main-title {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        .presenter-info {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-top: 60px;
+            font-weight: 600;
+        }
+
+        /* Content Layouts */
+        .two-col {
+            display: flex;
+            gap: 40px;
+            height: 100%;
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 20px;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        /* Features & Cards */
+        .feature-card {
+            background: var(--gray);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        /* Tables */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        .specs-table th,
+        .specs-table td {
+            text-align: left;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .specs-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            width: 30%;
+        }
+
+        .specs-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Cost Analysis Table */
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .cost-table th {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .cost-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: right;
+        }
+
+        .cost-table td:first-child {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .total-row {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .total-row td {
+            border-color: var(--primary);
+        }
+
+        /* Pricing Grid */
+        .price-big {
+            font-size: 48px;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .price-item {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .price-item h4 {
+            margin: 0;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .price-item .amount {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 5px;
+        }
+
+        .price-item .unit {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Gallery Grid */
+        .gallery-slide-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 15px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .gallery-item {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: #eee;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 60px;
+            right: 60px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border: 5px solid white;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        #lightbox-close {
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #lightbox-caption {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        /* Print Override */
+        @media print {
+            body {
+                background: none;
+                -webkit-print-color-adjust: exact;
+                height: auto;
+            }
+
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                width: 100% !important;
+                height: 100vh !important;
+            }
+
+            .gallery-item {
+                break-inside: avoid;
+            }
+
+            /* Hide lightbox in print */
+            #lightbox {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Lightbox Element -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" onclick="event.stopPropagation()"> <!-- Stop click on image closing lightbox -->
+        <div id="lightbox-caption"></div>
+    </div>
+
+    <!-- Slide 1: Cover -->
+    <div class="slide cover-slide">
+        <div class="cover-content">
+            <div class="logo" style="margin-bottom: 40px; color: white;">MIMAKI</div>
+            <h1 class="main-title">3DUJ-2207</h1>
+            <div class="subtitle">Kompakt Full-Renkli 3D Yazıcı</div>
+            <p style="font-size: 24px;">Ofisiniz için Yüksek Çözünürlüklü<br>10 Milyon Renk Kapasitesi</p>
+
+            <div class="presenter-info">
+                Sunumu Yapan: Erdem Erciyas<br>
+                Tarih: 19 Şubat 2026
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Introduction -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Renkli Üretim Artık Ofisinizde</span>
+                <span class="logo">Mimaki</span>
+            </div>
+            <div class="two-col">
+                <div class="col">
+                    <p style="font-size: 22px;">Mimaki 3DUJ-2207, 10 milyonun üzerinde renk seçeneği ile masaüstü 3D
+                        baskı dünyasına profesyonel bir soluk getiriyor.</p>
+                    <div class="feature-card">
+                        <div class="feature-title">Gerçekçi Renkler</div>
+                        Standart alçı yöntemlerinin (5-6 milyon renk) sunduğunun yaklaşık iki katı renk yelpazesi.
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">Şeffaf ve Yarı Şeffaf Baskı</div>
+                        Renkli mürekkep ile şeffaf mürekkebi karıştırarak, yarı saydam modeller ve cam benzeri efektler
+                        oluşturun.
+                    </div>
+                </div>
+                <div class="col" style="align-items: center;">
+                    <div
+                        style="width: 100%; height: 300px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                        10 Milyon+ Renk
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; color: #666;">
+                        Tıbbi modeller, mimari maketler ve figürler için mükemmel detay.
+                    </p>
+                </div>
+            </div>
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 2 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Video -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Tanıtım Videosu</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div class="video-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WntST66JFz8"
+                    title="Mimaki 3DUJ-2207 Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 3 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Cost Analysis -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Örnek Maliyet Analizi: İnsan Figürü</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div class="two-col">
+                <div class="col" style="flex: 0.8;">
+                    <img src="figur.jpeg" class="gallery-item"
+                        style="width: 100%; border-radius: 8px; border: 1px solid #ddd;" alt="Figur Analizi"
+                        onclick="openLightbox(this.src, 'Figür Analizi')">
+                </div>
+                <div class="col">
+                    <h3>Model Detayları</h3>
+                    <ul>
+                        <li><strong>Boyutlar:</strong> 42 x 25 x 127 mm</li>
+                        <li><strong>Baskı Süresi:</strong> ~9 saat 55 dakika</li>
+                    </ul>
+
+                    <h3>Maliyet Hesaplaması (Yaklaşık)</h3>
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Malzeme</th>
+                                <th>Miktar (cc)</th>
+                                <th>Birim Fiyat (€/cc)</th>
+                                <th>Tutar (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Renkli (CMYK)</td>
+                                <td>24.57</td>
+                                <td>0.192</td>
+                                <td>4.72 €</td>
+                            </tr>
+                            <tr>
+                                <td>Şeffaf (Clear)</td>
+                                <td>8.02</td>
+                                <td>0.209</td>
+                                <td>1.68 €</td>
+                            </tr>
+                            <tr>
+                                <td>Beyaz (White)</td>
+                                <td>40.88</td>
+                                <td>0.256</td>
+                                <td>10.47 €</td>
+                            </tr>
+                            <tr>
+                                <td>Destek (Support)</td>
+                                <td>56.76</td>
+                                <td>0.111</td>
+                                <td>6.30 €</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>TOPLAM</td>
+                                <td>130.23 cc</td>
+                                <td>-</td>
+                                <td>~23.17 €*</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 12px; color: #666; margin-top: 10px;">*Reçine liste fiyatları baz alınarak
+                        hesaplanmıştır.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 4 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Gallery Part 1 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Ürün Galeri & Örnekler (1/3)</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div class="gallery-slide-grid">
+                <div class="gallery-item"><img src="demo.jpeg" onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="demo2.jpeg" onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="figur.jpeg" onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.25 (1).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.25 (2).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.26 (1).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.26 (2).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.26 (3).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 5 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Gallery Part 2 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Ürün Galeri & Örnekler (2/3)</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div class="gallery-slide-grid">
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.26 (4).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.26.jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.27.jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.28 (1).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.28 (2).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.28 (3).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.28.jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (2).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 6 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Gallery Part 3 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Ürün Galeri & Örnekler (3/3)</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div class="gallery-slide-grid">
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (3).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (4).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (5).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (6).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29 (7).jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.29.jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <div class="gallery-item"><img src="WhatsApp Image 2026-02-18 at 14.52.30.jpeg"
+                        onclick="openLightbox(this.src)"></div>
+                <!-- Empty slots for balance -->
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 7 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Specifications -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Teknik Özellikler</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <table class="specs-table">
+                <tr>
+                    <th>Baskı Yöntemi</th>
+                    <td>UV Kürlemeli Inkjet (Piezo Kafa)</td>
+                </tr>
+                <tr>
+                    <th>Baskı Çözünürlüğü</th>
+                    <td>1200 dpi</td>
+                </tr>
+                <tr>
+                    <th>Katman Kalınlığı</th>
+                    <td>28 mikron (Standart mod)</td>
+                </tr>
+                <tr>
+                    <th>Maksimum Baskı Alanı</th>
+                    <td>203 x 203 x 76 mm</td>
+                </tr>
+                <tr>
+                    <th>Kullanılan Mürekkepler</th>
+                    <td>CMYK (Cyan, Magenta, Yellow, Black) + Beyaz + Şeffaf</td>
+                </tr>
+                <tr>
+                    <th>Destek Malzemesi</th>
+                    <td>Suda çözünebilen destek malzemesi</td>
+                </tr>
+                <tr>
+                    <th>Veri Formatları</th>
+                    <td>STL, OBJ, VRML, PLY, 3MF</td>
+                </tr>
+                <tr>
+                    <th>Boyutlar / Ağırlık</th>
+                    <td>1355 x 1290 x 856 mm / 140 kg (Ana ünite)</td>
+                </tr>
+                <tr>
+                    <th>Bağlantı</th>
+                    <td>Ethernet (1000BASE-T)</td>
+                </tr>
+            </table>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 8 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Investment & Pricing -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="header">
+                <span class="slide-title">Yatırım Maliyeti</span>
+                <span class="logo">Mimaki</span>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="margin-bottom: 10px;">Cihaz Fiyatı</h2>
+                <div class="price-big">35.000 EURO <span style="font-size: 24px; color: #666; font-weight: normal;">+
+                        KDV</span></div>
+                <p style="color: #666;">Distributor Garantili - Kurulum ve eğitim dahildir.</p>
+            </div>
+
+            <h3 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Reçine / Mürekkep Fiyatları (Liste Fiyatı)
+                <span style="font-size: 14px; color: #999;">(1 Litre Şişe)</span>
+            </h3>
+
+            <div class="pricing-grid">
+                <div class="price-item">
+                    <h4>Renkli (CMYK)</h4>
+                    <span class="amount">192 €</span>
+                </div>
+                <div class="price-item">
+                    <h4>Beyaz (White)</h4>
+                    <span class="amount">256 €</span>
+                </div>
+                <div class="price-item">
+                    <h4>Şeffaf (Clear)</h4>
+                    <span class="amount">209 €</span>
+                </div>
+                <div class="price-item">
+                    <h4>Destek (Support)</h4>
+                    <span class="amount">111 €</span>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>Mimaki 3DUJ-2207 Tanıtımı</span>
+                <span>Sayfa 9 - Sunumu Yapan: Erdem Erciyas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Summary & Contact -->
+    <div class="slide cover-slide" style="background: linear-gradient(135deg, var(--primary) 0%, #a80006 100%);">
+        <div class="cover-content" style="text-align: center; width: 100%; max-width: 100%;">
+            <h1 style="font-size: 48px; margin-bottom: 20px;">Teşekkürler</h1>
+            <p style="font-size: 24px; margin-bottom: 40px;">Sorularınız için bizimle iletişime geçebilirsiniz.</p>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; display: inline-block;">
+                <p style="font-size: 20px; margin: 10px 0;"><strong>Mimaki 3DUJ-2207</strong></p>
+                <p style="margin-bottom: 20px;">Kompakt, Tam Renkli, Profesyonel.</p>
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.3); margin: 20px 0;">
+                <p style="font-size: 22px;"><strong>Erdem Erciyas</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLightbox(src, caption = '') {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const cap = document.getElementById('lightbox-caption');
+
+            img.src = src;
+            cap.innerText = caption;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
